@@ -1,0 +1,22 @@
+{
+  "tasks": [],
+  "users": [],
+  "classifications": [
+    {
+      "id": 10,
+      "label": "Partial Development"
+    },
+    {
+      "id": 20,
+      "label": "Full Development"
+    },
+    {
+      "id": 30,
+      "label": "Testing"
+    },
+    {
+      "id": 40,
+      "label": "Cleanup"
+    }
+  ]
+}
