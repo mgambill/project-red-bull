@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import { defineProject } from '@/composables/useProject';
 import type { User } from '@/types';
 import { format, add, getWeek, differenceInCalendarWeeks, startOfWeek as fn_startOfWeek, endOfWeek as fn_endOfWeek, differenceInBusinessDays } from 'date-fns';
-
-import { vIntersectionObserver } from '@vueuse/components'
-import { el } from 'date-fns/locale';
 import { useWindowSize } from '@vueuse/core';
 const { width, height } = useWindowSize()
 const options = {
@@ -22,7 +18,6 @@ const endDate = ref(options.endDate ?? add(startDate.value, defaults.endDateOffs
 const startWeek = computed(() => getWeek(startDate.value))
 const totalWeeks = computed(() => differenceInCalendarWeeks(endDate.value, startDate.value))
 const totalDays = computed(() => differenceInBusinessDays(endDate.value, startDate.value))
-const gridStyle = computed(() => `grid-template-columns: repeat(${(totalWeeks.value * 7)}, 2rem);`)
 
 const users: User[] = [
   {
@@ -46,48 +41,79 @@ const users: User[] = [
 ]
 
 const tasks = [
-  {
-    id: 1,
-    label: "Login Page"
-  },
-  {
-    id: 2,
-    label: "Home Page"
-  },
-  {
-    id: 3,
-    label: "Login Page"
-  },
+  { id: 100, type: "Feature", label: "4 Service Provider Organization Module" },
+  { id: 101, type: "Feature", label: "1. Provider Origin Module" },
+  { id: 102, type: "Feature", label: "3 Care Management/Community Health Worker Module" },
+  { id: 103, type: "User Story", label: "Patients List Page" },
+  { id: 104, type: "User Story", label: "Patient Details" },
+  { id: 105, type: "Feature", label: "Shared Module Features" },
+  { id: 106, type: "User Story", label: "Authentication and Roles" },
+  { id: 107, type: "User Story", label: "Patient Editor" },
+  { id: 108, type: "User Story", label: "Home Page - Provider Origin" },
+  { id: 109, type: "User Story", label: "Settings Page" },
+  { id: 110, type: "User Story", label: "Notifications Page" },
+  { id: 111, type: "User Story", label: "Referrals List Page - Provider Origin" },
+  { id: 112, type: "User Story", label: "Referral Details" },
+  { id: 113, type: "User Story", label: "Referral Editor" },
+  { id: 114, type: "User Story", label: "Document Viewer" },
+  { id: 115, type: "Feature", label: "7. Dashboard and Analytics" },
+  { id: 116, type: "Feature", label: "8. Cross Domain Admin Function" },
+  { id: 117, type: "User Story", label: "Home Page - CMHW" },
+  { id: 118, type: "User Story", label: "Referrals List Page - CMHW" },
+  { id: 119, type: "User Story", label: "Referral Details - CMHW" },
+  { id: 120, type: "User Story", label: "Pathways List Page" },
+  { id: 121, type: "User Story", label: "Pathway Details Page" },
+  { id: 122, type: "User Story", label: "Pathway Editor" },
+  { id: 123, type: "User Story", label: "In-app messaging" },
+  { id: 124, type: "Feature", label: "9. Service Directory" },
+  { id: 125, type: "Task", label: "Review referral resources Aadli provided and determine the critical info of a referral to show" },
+  { id: 126, type: "Task", label: "Iron out notification trigger logic with Aadli" },
+  { id: 127, type: "User Story", label: "Patients Page - Service Provider" },
+  { id: 128, type: "User Story", label: "Patient Details - Service Provider" },
+  { id: 129, type: "User Story", label: "Referral Editor - Service Provider" },
+  { id: 130, type: "User Story", label: "Full Design in Figma" },
+
+
 ] as const
 
-type Task = typeof tasks[number]
+type Task = { id: number, label: string }
 
 const page = 0, size = 1
 
-const estimate = {
-  tasks: [
-    {
-      taskId: 1,
-      duration: 7,
-      resourceId: 100,
-      startDate: '2023-03-01'
-    },
-    {
-      taskId: 2,
-      duration: 7,
-      resourceId: 100,
-      startDate: '2023-03-05'
-    },
-    {
-      taskId: 3,
-      duration: 7,
-      resourceId: 101,
-      startDate: '2023-03-06'
-    }
-  ]
-}
+const estimate = ref([
+  { taskId: 101, duration: 7, resourceId: 100, startDate: '2023-03-01' },
+  { taskId: 102, duration: 7, resourceId: 100, startDate: '2023-03-05' },
+  { taskId: 103, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 104, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 105, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 106, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 107, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 108, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 109, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 110, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 111, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 112, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 113, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 114, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 115, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 116, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 117, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 118, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 119, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 120, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 121, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 122, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 123, duration: 7, resourceId: 101, startDate: '2023-03-06' },
+  { taskId: 124, duration: 7, resourceId: 101, startDate: '2023-03-16' },
+  { taskId: 125, duration: 7, resourceId: 101, startDate: '2023-03-16' },
+  { taskId: 126, duration: 7, resourceId: 101, startDate: '2023-03-16' },
+  { taskId: 127, duration: 7, resourceId: 101, startDate: '2023-03-16' },
+  { taskId: 128, duration: 7, resourceId: 101, startDate: '2023-03-16' },
+  { taskId: 129, duration: 7, resourceId: 101, startDate: '2023-03-16' },
+  { taskId: 130, duration: 7, resourceId: 101, startDate: '2023-03-16' },
+])
 
-type Estimate = typeof estimate
+type Estimate = { taskId: number, duration: number, resourceId: number, startDate: string }
 
 const timeline = computed(() => {
   let d = startOfWeek.value
@@ -129,31 +155,38 @@ const people = [
   // More people...
 ]
 const isVisible = ref(false)
-function onIntersectionObserver([context]) {
-  console.log(context)
-  let { isIntersecting } = context
-  isVisible.value = isIntersecting
-}
 
 const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 function as<T>(item: any): T {
   return item as T
 }
-function mapEstimate(estimate: Estimate) {
-  return estimate.tasks.map(t => {
-    let task = tasks.find(x => x.id === t.taskId)!
-    let r = users.find(x => x.id === t.resourceId)!
-    return {
-      ...t,
-      label: task.label,
-      resourceName: r.name
-    }
-  })
+const mapEstimate = (t: Estimate) => {
+
+
+  let task = tasks.find(x => x.id === t.taskId)!
+  let r = users.find(x => x.id === t.resourceId)!
+  return {
+    id: t.taskId,
+    duration: t.duration,
+    resourceId: t.resourceId,
+    startDateLabel: t.startDate,
+    startDate: new Date(t.startDate),
+    label: task.label,
+    resourceName: r.name,
+    endDate: add(new Date(t.startDate), { days: t.duration - 1 })
+  }
+
 }
 
-const rows = computed(() => Math.floor(height.value / 75) - 1)
-
+const rows = computed(() => Math.floor(height.value / 32) - 1)
+const resolveDate = (i: number, j: number) => {
+  const d = add(startOfWeek.value, { days: i * 7 + j })
+  return [
+    d,
+    format(d, "yyyy-MM-dd")
+  ]
+}
 </script>
 
 <template>
@@ -187,6 +220,8 @@ const rows = computed(() => Math.floor(height.value / 75) - 1)
           <span> {{ totalDays }}</span>
         </div>
 
+        <pre>{{ estimate }}</pre>
+
       </div>
     </section>
 
@@ -198,34 +233,35 @@ const rows = computed(() => Math.floor(height.value / 75) - 1)
           <thead>
             <tr>
               <th scope="col"
-                class="sticky top-0 left-0 z-40 border-b w-[360px] border-gray-300 bg-white bg-opacity-75 py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter8">
-                Task</th>
+                class="sticky top-0 left-0 z-20 border w-100 border-gray-300 bg-white text-left text-sm font-semibold text-gray-900">
+                <div class="p-2">Task</div>
+              </th>
               <th scope="col"
-                class="sticky top-0 left-[360px] z-40 border-b border-r border-gray-300 w-48 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter">
-                Resource</th>
-              <th scope="col"
-                class="sticky top-0 z-10 border-b border-gray-300 bg-white w-20 bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter">
+                class="sticky top-0 left-100 z-20 border-b border-r w-32  border-gray-300 bg-white text-center text-sm font-semibold text-gray-900">
                 Start</th>
               <th scope="col"
-                class="sticky top-0 z-10 border-b border-gray-300 w-20 bg-white bg-opacity-75 px-3 py-3.5 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter">
-                End</th>
+                class="sticky top-0 left-104 z-20 border-b border-r border-gray-300 w-20 bg-white text-center text-sm font-semibold text-gray-900">
+                Duration</th>
+              <th scope="col"
+                class="sticky top-0 z-10 border-b border-r border-gray-300 w-48 bg-white text-left text-sm font-semibold text-gray-900">
+                Resource</th>
 
               <template v-for="(w, i) in totalWeeks">
                 <th colspan="7"
-                  class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 text-left text-sm font-semibold text-gray-900 backdrop-blur backdrop-filter outline">
+                  class="sticky top-0 z-10 border-b border-gray-300 bg-white bg-opacity-75 text-left text-sm font-semibold text-gray-900">
                   <div class="grid grid-row-3 grid-cols-7">
-                    <div class="col-span-7">Week {{ w }}</div>
-                    <div class="col-span-7">
+                    <div class="col-span-7 border-b p-2 text-center border-l">Week {{ w }}</div>
+                    <div class="col-span-7 border-b p-2 text-center border-l">
                       {{ format(add(startOfWeek, { days: i * 7 }), "MMM dd") }} - {{ format(add(startOfWeek, {
                         days: i * 7
                           + 6
                       }), "MMM dd") }}
                     </div>
                     <template v-for="(_, j) in 7">
-                      <div class="text-center outline">{{ timeline.headings[j + i * 7].day }}</div>
+                      <div :class="['text-center', 'border-l']">{{ weekdays[j][0] }}</div>
                     </template>
                     <template v-for="(_, j) in 7">
-                      <div class="text-center outline">{{ weekdays[j][0] }}</div>
+                      <div :class="['text-center', 'border-l']">{{ timeline.headings[j + i * 7].day }}</div>
                     </template>
                   </div>
                 </th>
@@ -234,60 +270,82 @@ const rows = computed(() => Math.floor(height.value / 75) - 1)
             </tr>
           </thead>
           <tbody>
-            <template v-for="(item, $rowIndex) in mapEstimate(estimate)" :key="item.taskId">
+            <template v-for="e in estimate" :key="e.taskId">
+              <template v-for="(item) in [mapEstimate(e)]" :key="item.taskId">
 
-              <tr class="children:whitespace-nowrap children:text-sm children:text-gray-500">
-                <td
-                  class="border-b border-gray-200 sticky left-0 z-10 whitespace-nowrap bg-white py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
-                  <div class="">
-                    {{ item.label }}
-                  </div>
-                </td>
-                <td
-                  class="border-b border-r border-gray-200 sticky left-[360px] whitespace-nowrap bg-white px-3 py-4 text-sm text-gray-500">
-                  <select name="" id="" v-model="item.resourceId" class="py-1 px-2 w-full border-gray-200">
-                    <template v-for="user in users">
-                      <option :value="user.id">{{ user.name }}</option>
+                <tr class="children:whitespace-nowrap children:text-sm children:text-gray-500 children:border-gray-300">
+                  <td
+                    class="border-b border-x border-gray-200 sticky left-0 z-10 whitespace-nowrap  bg-white text-sm font-medium text-gray-900 px-3">
+                    <span class="block truncate w-96">
+
+                      {{ item.label }}
+                    </span>
+
+                  </td>
+                  <td class="border-b border-r sticky left-100  bg-white text-sm text-gray-500">
+                    <DateInput v-model="e.startDate" class="border-0 text-sm p-0 w-full min-w-0" />
+                  </td>
+                  <td class="border-b  border-r sticky left-104  bg-white text-sm text-gray-500">
+                    <input type="number" class="border-0 text-sm w-full py-0" v-model="e.duration" />
+                  </td>
+                  <td class="border-b border-r  bg-white text-sm text-gray-500">
+                    <select name="" id="" v-model="e.resourceId" class="py-1 px-2 w-full border-transparent text-sm">
+                      <template v-for="user in users">
+                        <option :value="user.id">{{ user.name }}</option>
+                      </template>
+                    </select>
+                  </td>
+
+                  <template v-for="(_, i) in totalWeeks">
+                    <template v-for="(_, j) in 7">
+                      <template v-for="[date, label] in [resolveDate(i, j)]">
+                        <template v-if="label === item.startDateLabel">
+                          <td :colspan="item.duration" class="border-b border-l">
+                            <div class="bg-blue-300 w-full h-6"></div>
+                          </td>
+                        </template>
+                        <template v-else-if="date > item.startDate && date <= item.endDate"></template>
+                        <template v-else>
+                          <td class="border-b border-l"></td>
+                        </template>
+                      </template>
                     </template>
-                  </select>
-                </td>
-                <td class="border-b border-gray-200 whitespace-nowrap bg-white px-3 py-4 text-sm text-gray-500">{{
-                  item.startDate }}</td>
-                <td class="border-b border-gray-200 whitespace-nowrap bg-white px-3 py-4 text-sm text-gray-500">
-                </td>
-
-                <template v-for="i in totalWeeks">
-                  <template v-for="j in 7">
-                    <td :data-id="(i - 1) * 7 + j + (($rowIndex + 1) * 1000)">{{ (i - 1) * 7 + j + (($rowIndex + 1) * 1000)}}</td>
                   </template>
-                </template>
-              </tr>
+                </tr>
 
 
+              </template>
             </template>
 
-            <tr
-              class="bg-white h-[75px] children:border-b children:border-gray-200 children:whitespace-nowrap children:px-3 children:py-4 children:text-sm children:text-gray-500">
-              <td class="sticky left-0 z-20 bg-white">
-                <a href="" class="italic">Add Task</a>
+            <tr class="children:whitespace-nowrap children:text-sm children:text-gray-500 children:border-gray-300">
+              <td
+                class="border-b border-x border-gray-200 sticky left-0 z-10 whitespace-nowrap  bg-zinc-50 text-sm font-medium text-gray-800 px-3">
+
+                <input type="text" placeholder="Add Task..." class="border-0 text-sm p-0 w-full min-w-0 bg-transparent placeholder:text-gray-400" />
+
               </td>
-              <td class="border-r sticky left-[360px] z-20 bg-white">
-                <select name="" id="">
+              <td class="border-b border-r sticky left-100  bg-zinc-50 text-sm text-gray-500">
+                <DateInput class="border-0 text-sm p-0 w-full min-w-0 bg-transparent" />
+              </td>
+              <td class="border-b  border-r sticky left-104  bg-zinc-50 text-sm text-gray-500">
+                <input type="number" class="border-0 text-sm w-full py-0 bg-transparent" />
+              </td>
+              <td class="border-b border-r  bg-zinc-50 text-sm text-gray-500">
+                <select name="" id="" class="py-1 px-2 w-full border-transparent text-sm bg-transparent">
                   <template v-for="user in users">
                     <option :value="user.id">{{ user.name }}</option>
                   </template>
                 </select>
               </td>
-              <td>
-                <input type="date" name="" id="">
-              </td>
-              <td :colspan="totalWeeks * 7" class="px-3 py-4 border-b border-gray-200">{{ i }}</td>
+              <td :colspan="totalWeeks * 7" class="p-0 border-b border-l border-gray-200"></td>
             </tr>
 
-            <template v-if="estimate.tasks.length < rows">
-              <template v-for="i in (rows - estimate.tasks.length - 1)">
-                <tr class="bg-white h-[75px]">
-                  <td :colspan="totalWeeks * 7 + 3" class="px-3 py-4 border-b border-gray-200">{{ i }}</td>
+            <template v-if="estimate.length < rows">
+              <template v-for="i in (rows - estimate.length - 1)">
+
+                <tr class="bg-white h-8 children:border-gray-200">
+                  <td class="border" colspan="4"></td>
+                  <td class="border" :colspan="totalWeeks * 7">&nbsp;</td>
                 </tr>
               </template>
             </template>
@@ -296,7 +354,7 @@ const rows = computed(() => Math.floor(height.value / 75) - 1)
         </table>
       </div>
 
-     </section>
+    </section>
   </div>
   <pre v-if="false">{{ timeline }}</pre>
 </template>

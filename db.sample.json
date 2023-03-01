@@ -1,5 +1,18 @@
 {
-  "tasks": [],
+  "tasks": [
+    {
+      "id": 1,
+      "label": "Login Page"
+    },
+    {
+      "id": 2,
+      "label": "Home Page"
+    },
+    {
+      "id": 3,
+      "label": "Login Page"
+    }
+  ],
   "users": [],
   "classifications": [
     {
