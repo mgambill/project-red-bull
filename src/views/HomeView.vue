@@ -190,9 +190,9 @@ const resolveDate = (i: number, j: number) => {
 </script>
 
 <template>
-  <section class="flex h-full flex-col bg-green-200">
+  <section class="flex h-full flex-col">
 
-    <header class="h-24 bg-pink-100"></header>
+    <header class=" bg-pink-100"></header>
 
     <main class="flex-1 bg-orange-50 w-full flex">
        <div class="flex flex-col gap-4 h-full max-w-xs w-96 rounded top-0 p-2 bg-slate-200">
@@ -269,7 +269,7 @@ const resolveDate = (i: number, j: number) => {
 
                     <tr class="children children:border-r children:border-b children:border-gray-300">
                       <td
-                        class="border-b p-1 border-x border-gray-200 sticky left-0 z-10 whitespace-nowrap  bg-white text-sm font-medium text-gray-900 px-3">
+                        class="border-b p-1 w-100 border-x border-gray-200 sticky left-0 z-10 whitespace-nowrap  bg-white text-sm font-medium text-gray-900 px-3">
                         <span class="block truncate w-96">
 
                           {{ item.label }}
@@ -355,6 +355,4 @@ const resolveDate = (i: number, j: number) => {
     <footer class=""></footer>
 
   </section>
-
-
 </template>
